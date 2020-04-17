@@ -18,3 +18,14 @@ RUN wget --no-check-certificate https://dl.google.com/go/go1.14.2.linux-amd64.ta
 RUN ldconfig \
   && . ~/.bashrc \
   && . ~/.profile
+
+FROM dependencies AS builder
+# --------------------------
+
+ADD . /app/cd-rental
+
+WORKDIR /app/cd-rental
+
+RUN ldconfig \
+  && . ~/.bashrc \
+  && . ~/.profile
