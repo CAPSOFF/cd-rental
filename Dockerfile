@@ -1,5 +1,5 @@
-FROM ubuntu:18.04 AS dependencies
-# -------------------------------
+FROM mysql:5.6 AS dependencies
+# ----------------------------
 
 WORKDIR /tmp
 
@@ -22,6 +22,10 @@ RUN ldconfig \
 FROM dependencies AS builder
 # --------------------------
 
+ENV MYSQL_DATABASE db_cd_rental
+ENV MYSQL_ROOT_PASSWORD root
+
+ADD ./sql-scripts/ /docker-entrypoint-initdb.d/
 ADD . /app/cd-rental
 
 WORKDIR /app/cd-rental
